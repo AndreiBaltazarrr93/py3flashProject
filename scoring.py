@@ -1,4 +1,4 @@
-def dice_score(dice_rolls, name):
+def dice_score(dice_rolls, name, limit):
     #global name, score
     score = 0
     
@@ -34,12 +34,13 @@ def dice_score(dice_rolls, name):
                 print(f"{name}, you got a three-of-a-kind with {value}s and a pair! You scored 1500 points.")
             elif count == 2:
                 pairs = [v for v, c in dice_counts.items() if c == 2 and v not in [1, 4]]
-                if len(pairs) == 2:
-                    score += 1500
-                    print(f"{name}, you got two pairs! You scored 1500 points.")
+                if len(pairs) >= 1:
+                    score += 750
+                    print(f"{name}, you got a pair! You scored 750 points.")
                 elif value in [1, 4]:
                     score -= 500
                     print(f"{name}, you lost 500 points for rolling a pair of {value}s.")
+        print(f"{name}, your current score is {score}.")
 
     for dice in dice_rolls:
         if dice == 1:
@@ -60,7 +61,13 @@ def dice_score(dice_rolls, name):
         elif dice == 6:
             score += 300
             print(f"{name}, you got 300 points for rolling a 6.")
-
-    # display current score
-    print(f"{name}, your current score is {score}.")
+        
+        print(f"{name}, your current score is {score}.")
+    # display current score    
+    if score <= -1000:
+        print(f"YOU LOSE, Player {name}, your current score is {score}.")
+        print("GAME OVER")
+    elif score >= limit:
+        print(f"YOU WON, Player {name}, your current score is {score}.")
+        print("GAME OVER")
     return score
