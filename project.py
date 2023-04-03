@@ -4,11 +4,12 @@ import scoring
 # get player's name
 #global name, score 
 name = input("What is your name? ")
+limit = int(input("What is the desired Limit of your score?"))
 
 # initialize score and loop until user reaches goal or goes below negative limit
 score = 0
 rounds = 1
-while -1000 <= score < 10000:
+while -1000 <= score < limit:
     # roll dice
     dice_rolls = [random.randint(1, 6) for _ in range(5)]
     
@@ -28,7 +29,7 @@ while -1000 <= score < 10000:
 
     # display new dice rolls
     print("Your new dice rolls: ", dice_rolls)
-    score = scoring.dice_score(dice_rolls, name)
+    score = scoring.dice_score(dice_rolls, name, limit)
     rounds += 1
     
 
